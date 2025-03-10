@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_CREDS = credentials('docker_creds')  // This will get the creds as a map
+        DOCKER_CREDS = credentials('dockerhub_creds')  // This will get the creds as a map
         DOCKER_REPO = "dockerhubraghu/nginxdevops"
     }
     stages {
