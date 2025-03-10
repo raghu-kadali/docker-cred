@@ -1,12 +1,20 @@
 pipeline{
     agent any
+    environment{
+        DOCKER_CREDS=credentials('docker_creds')
+        DOCKER_REPO="dockerhubraghu/nginxdevops"
+    }
     stages{
         stage('DockerBuildPush'){
             steps{
                 sh "docker pull nginx"
-                echo "****Printing the images******"
+                echo "*****printing the images*******"
                 sh "docker images"
+                sh "docker tag nginx ${DOCKER_REPO}:b6"
+                echo "****docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
+                sh "docker push ${DOCKER_REPO}:b6"
             }
+
         }
     }
 }
